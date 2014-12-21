@@ -14,7 +14,7 @@ def print_tree(l):
                     break
 
 def new():
-    return [-float('inf')]
+    return ['heap']
 
 def parent_index(i):
     return i / 2
