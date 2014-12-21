@@ -31,13 +31,12 @@ def add(obj, value):
 
 def balance_up(obj, icur):
     if icur <= 1:
-            return
+        return
 
     iparent = parent_index(icur)
     if obj[icur] < obj[iparent]:
-            (obj[icur], obj[iparent]) = (obj[iparent], obj[icur])
-
-            balance_up(obj, iparent)
+        (obj[icur], obj[iparent]) = (obj[iparent], obj[icur])
+        balance_up(obj, iparent)
 
 def remove(heap):
     if len(heap) <= 1:
