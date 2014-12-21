@@ -13,6 +13,9 @@ def print_tree(l):
             if start + amount >= len(l):
                     break
 
+def new():
+    return [-float('inf')]
+
 def parent_index(i):
     return i / 2
 

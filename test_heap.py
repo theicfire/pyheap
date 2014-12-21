@@ -14,7 +14,7 @@ def test_print_tree(capsys):
 	assert(lines[2] == '[4, 5]')
 
 def test_add(capsys):
-	a = [-float('inf')]
+        a = heap.new()
 	heap.add(a, 1)
 	heap.add(a, 2)
 	heap.add(a, 4)
@@ -31,21 +31,14 @@ def test_heap():
         assert(heap.look(a) == 4)
 
 def test_add2():
-	a = [-float('inf')]
-	heap.add(a, 1)
-	heap.add(a, 3)
-	heap.add(a, 2)
-	assert(a == [1, 3, 2])
-
-def test_add2():
-	a = [-float('inf')]
+        a = heap.new()
 	heap.add(a, 1)
 	heap.add(a, 3)
 	heap.add(a, 2)
 	assert(a == [-float('inf'), 1, 3, 2])
 
 def test_remove():
-        a = [-float('inf')]
+        a = heap.new()
         with pytest.raises(heap.HeapError):
             heap.remove(a)
 
@@ -59,7 +52,7 @@ def test_all():
     sorted_list = sorted(unsorted_list)
     heap_sorted = []
 
-    my_heap = [-float('inf')]
+    my_heap = heap.new()
     for i in xrange(length):
         heap.add(my_heap, unsorted_list[i])
 
