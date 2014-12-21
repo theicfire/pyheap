@@ -24,10 +24,10 @@ def test_add(capsys):
 	lines = out.strip().split('\n')
 
 	assert(len(lines) == 3)
-	assert(a == ['heap', 1, 2, 4, 3])
+	assert(a == [1, 2, 4, 3])
 
 def test_heap():
-	a = ['heap', 4]
+	a = [4]
         assert(heap.look(a) == 4)
 
 def test_add2():
@@ -35,16 +35,16 @@ def test_add2():
 	heap.add(a, 1)
 	heap.add(a, 3)
 	heap.add(a, 2)
-	assert(a == ['heap', 1, 3, 2])
+	assert(a == [1, 3, 2])
 
 def test_remove():
         a = heap.new()
         with pytest.raises(heap.HeapError):
             heap.remove(a)
 
-        a = ['heap', 1, 2, 3, 4, 5]
+        a = [1, 2, 3, 4, 5]
         assert(heap.remove(a) == 1)
-        assert(a == ['heap', 2, 4, 3, 5])
+        assert(a == [2, 4, 3, 5])
 
 def test_all():
     length = 5000
@@ -56,7 +56,7 @@ def test_all():
     for i in xrange(length):
         heap.add(my_heap, unsorted_list[i])
 
-    while len(my_heap) > 1:
+    while len(my_heap) > 0:
         heap_sorted.append(heap.remove(my_heap))
 
     assert heap_sorted == sorted(unsorted_list)

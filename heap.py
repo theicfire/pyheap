@@ -14,13 +14,13 @@ def print_tree(l):
                     break
 
 def new():
-    return ['heap']
+    return []
 
 def parent_index(i):
-    return i / 2
+    return (i - 1) / 2
 
 def look(heap):
-    return heap[1]
+    return heap[0]
 
 def add(obj, value):
     obj.append(value)
@@ -36,18 +36,18 @@ def balance_up(obj, icur):
         balance_up(obj, iparent)
 
 def remove(heap):
-    if len(heap) <= 1:
+    if len(heap) <= 0:
         raise HeapError("Can't remove from empty heap")
-    ret = heap[1]
-    heap[1] = heap[-1]
+    ret = heap[0]
+    heap[0] = heap[-1]
     heap.pop()
 
-    balance_down(heap, 1)
+    balance_down(heap, 0)
     return ret
 
 def min_child(heap, icur):
-    ileft = icur * 2
-    iright = icur * 2 + 1
+    ileft = icur * 2 + 1
+    iright = icur * 2 + 2
     if ileft >= len(heap):
         return icur
     imin_child = ileft
@@ -58,7 +58,7 @@ def min_child(heap, icur):
     return imin_child
 
 def balance_down(heap, icur):
-    assert(icur >= 1)
+    assert(icur >= 0)
     if icur * 2 >= len(heap):
         return
 
