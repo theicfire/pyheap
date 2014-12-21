@@ -16,12 +16,6 @@ def print_tree(l):
 def parent_index(i):
     return i / 2
 
-def left_child_index(i):
-    return i * 2
-
-def right_child_index(i):
-    return i * 2 + 1
-
 def look(heap):
     return heap[1]
 
@@ -49,21 +43,20 @@ def remove(heap):
     return ret
 
 def min_child(heap, icur):
-    ileft = left_child_index(icur)
-    iright = right_child_index(icur)
+    ileft = icur * 2
+    iright = icur * 2 + 1
     if ileft >= len(heap):
         return icur
     imin_child = ileft
     if iright < len(heap):
-        min_child = min(heap[ileft], heap[iright])
-        imin_child = ileft if heap[ileft] == min_child else iright
+        imin_child = ileft if heap[ileft] <= heap[iright] else iright
     if heap[icur] <= heap[imin_child]:
         return icur
     return imin_child
 
 def balance_down(heap, icur):
     assert(icur >= 1)
-    if left_child_index(icur) >= len(heap):
+    if icur * 2 >= len(heap):
         return
 
     ibetter = min_child(heap, icur)
@@ -73,4 +66,4 @@ def balance_down(heap, icur):
     balance_down(heap, ibetter)
 
 if __name__ == '__main__':
-    pytest.main([__file__])
+    pytest.main()
