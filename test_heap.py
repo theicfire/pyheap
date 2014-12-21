@@ -55,17 +55,18 @@ def test_remove():
         assert(a == [-float('inf'), 2, 4, 3, 5])
 
 def test_all():
-    length = 5
+    length = 50000
     unsorted_list = [int(random.random() * 10000) for x in xrange(length)]
     sorted_list = sorted(unsorted_list)
     heap_sorted = []
 
     my_heap = [-float('inf')]
+    print 'add'
     for i in xrange(length):
         heap.add(my_heap, unsorted_list[i])
 
+    print 'remove'
     while len(my_heap) > 1:
         heap_sorted.append(heap.remove(my_heap))
 
-    print heap_sorted
     assert heap_sorted == sorted(unsorted_list)

@@ -44,7 +44,7 @@ def remove(heap):
         raise HeapError("Can't remove from empty heap")
     ret = heap[1]
     heap[1] = heap[-1]
-    heap.pop(len(heap) - 1)
+    heap.pop()
 
     balance_down(heap, 1)
     return ret
@@ -68,7 +68,6 @@ def balance_down(heap, icur):
         return
 
     ibetter = min_child(heap, icur)
-    print 'better', ibetter
     if ibetter == icur:
         return
     (heap[icur], heap[ibetter]) = (heap[ibetter], heap[icur])
