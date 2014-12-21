@@ -8,7 +8,6 @@ def test_print_tree(capsys):
 
 	out, err = capsys.readouterr()
 	lines = out.strip().split('\n')
-	print out
 
 	assert(lines[0] == '[1]')
 	assert(lines[1] == '[2, 3]')
