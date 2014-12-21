@@ -1,5 +1,8 @@
 import pytest
 
+class HeapError(Exception):
+    pass
+
 def print_tree(l):
     level = 0
     while True:
@@ -13,27 +16,63 @@ def print_tree(l):
 def parent_index(i):
     return i / 2
 
+def left_child_index(i):
+    return i * 2
+
+def right_child_index(i):
+    return i * 2 + 1
+
 def look(heap):
-    return heap[0]
+    return heap[1]
 
 def add(obj, value):
     obj.append(value)
     balance_up(obj, len(obj) - 1)
 
 def balance_up(obj, icur):
-    if icur <= 0:
+    if icur <= 1:
             return
 
     iparent = parent_index(icur)
     if obj[icur] < obj[iparent]:
-            # swap
-            tmp = obj[icur]
-            obj[icur] = obj[iparent]
-            obj[iparent] = tmp
+            (obj[icur], obj[iparent]) = (obj[iparent], obj[icur])
 
             balance_up(obj, iparent)
 
-		
-	
+def remove(heap):
+    if len(heap) <= 1:
+        raise HeapError("Can't remove from empty heap")
+    ret = heap[1]
+    heap[1] = heap[-1]
+    heap.pop(len(heap) - 1)
+
+    balance_down(heap, 1)
+    return ret
+
+def min_child(heap, icur):
+    ileft = left_child_index(icur)
+    iright = right_child_index(icur)
+    if ileft >= len(heap):
+        return icur
+    imin_child = ileft
+    if iright < len(heap):
+        min_child = min(heap[ileft], heap[iright])
+        imin_child = ileft if heap[ileft] == min_child else iright
+    if heap[icur] <= heap[imin_child]:
+        return icur
+    return imin_child
+
+def balance_down(heap, icur):
+    assert(icur >= 1)
+    if left_child_index(icur) >= len(heap):
+        return
+
+    ibetter = min_child(heap, icur)
+    print 'better', ibetter
+    if ibetter == icur:
+        return
+    (heap[icur], heap[ibetter]) = (heap[ibetter], heap[icur])
+    balance_down(heap, ibetter)
+
 if __name__ == '__main__':
     pytest.main([__file__])
